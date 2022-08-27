@@ -97,6 +97,11 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -104,7 +109,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return getPassword();
+        return password;
     }
 
     @Override

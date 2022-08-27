@@ -1,7 +1,12 @@
 package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
-public interface RolesDao extends JpaRepository<User, Long> {
+import java.util.List;
+
+public interface RolesDao {
+    public List<Role> getAllRoles();
+    public List<String> getRolesNames();
 }

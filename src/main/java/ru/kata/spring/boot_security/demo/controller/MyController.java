@@ -1,54 +1,80 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RolesService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.List;
+
 @Controller
+@RequestMapping("/")
 public class MyController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
+
+    @Autowired
+    private RolesService rolesService;
 
     @GetMapping("/")
+    public String getLogin() {
+        return "login";
+    }
+
+    @GetMapping("/admin")
     public String getAllUsers(Model model) {
-        var users = service.getAllUsers();
+        var users = userService.getAllUsers();
         model.addAttribute("allUsers", users);
         return "/show-users";
     }
-    @GetMapping("/addUser")
+    @GetMapping("/admin/addUser")
     public String addUser(Model model) {
         User user = new User();
+        List<Role> currentRoles = rolesService.getAllRoles();
         model.addAttribute("user", user);
-        return "info-user";
+        model.addAttribute("currentRole", currentRoles);
+        return "add-user";
     }
-    @PostMapping("")
+    @PostMapping("/admin/addUser")
     public String saveUser(@ModelAttribute("user") User user) {
-        System.out.println(user.getId());
         if (user.getId() == 0) {
-            service.addUser(user);
-            System.out.println("saveuser");
+            userService.addUser(user);
         } else {
-            service.updateUser(user);
-            System.out.println("update");
+            userService.updateUser(user);
         }
 
-        return "redirect:/";
+        return "redirect:/admin";
     }
-    @GetMapping("edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String returnUser(@PathVariable("id") int id, Model model) {
-        User user = service.getUserById(id);
+        User user = userService.getUserById(id);
+        List<Role> currentRoles = rolesService.getAllRoles();
         model.addAttribute("user", user);
+        model.addAttribute("currentRole", currentRoles);
         System.out.println(user.getId());
+        return "add-user";
+
+    }
+
+    @GetMapping("/user")
+    public String showUser(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        int id = user.getId();
+        user = userService.getUserById(id);
+        model.addAttribute("user", user);
         return "info-user";
 
     }
+
     @RequestMapping("delete/{id}")
     public String deleteUser(@PathVariable("id") int id, Model model) {
-        service.deleteUser(id);
+        userService.deleteUser(id);
         return "redirect:/";
     }
 }
