@@ -10,30 +10,30 @@
     <input type="hidden" th:field="*{id}" id="id">
 
     <label for="name">Enter Name:</label>
-    <input type="text" th:field="*{name}" id="name">
+    <input id="name" th:field="*{name}" type="text">
     <br><br>
     <label for="surname">Enter Surname:</label>
-    <input type="text" th:field="*{surName}" id="surname">
+    <input id="surname" th:field="*{surName}" type="text">
     <br><br>
     <label for="age">Enter Age:</label>
-    <input type="text" th:field="*{age}" id="age">
+    <input id="age" th:field="*{age}" type="text">
     <br><br>
     <label for="username">Enter User Name</label>
-    <input type="text" th:field="*{userName}" id="username">
+    <input id="username" th:field="*{userName}" type="text">
     <br><br>
     <label for="password">Enter Password</label>
-    <input type="password" th:field="*{password}" id="password">
+    <input id="password" th:field="*{password}" type="password">
     <br><br>
     <label>Is Active</label>
-    <label>
-        <input type="radio" name="isActive" th:value="*{isActive()}" value="Is Active"/>
-    </label>
     <label>Role: </label>
-    <input type="checkbox" name="Role1" th:value="*{roles}" value="ROLE_ADMIN" >
-    <input type="checkbox" name="Role2" th:value="*{roles}" value="ROLE_USER" >
+    <label>
+        <input name="isActive" th:value="*{isActive()}" type="radio" value="Is Active"/>
+    </label>
 
+    <input name="Role1" th:value="*{roles}" type="checkbox" value="ROLE_ADMIN">
+    <input name="Role2" th:value="*{roles}" type="checkbox" value="ROLE_USER">
     <br>
-    <input type="button" th:value="Logout" onclick="window.location.href = '/logout';">
+    <input onclick="window.location.href = '/logout';" th:value="Logout" type="button">
 </form>
 </body>
 </html>
