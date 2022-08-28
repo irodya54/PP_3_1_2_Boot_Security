@@ -26,12 +26,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String userName) {
-        User user = entityManager.createQuery(
+        return entityManager.createQuery(
                         "SELECT u from User u WHERE u.userName = :username", User.class).
                 setParameter("username", userName).getSingleResult();
-
-        System.out.println(user);
-        return user;
     }
 
     @Override
@@ -42,7 +39,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
-        entityManager.flush();
     }
 
     @Override

@@ -24,8 +24,10 @@
     <label for="password">Enter Password</label>
     <input type="password" th:field="*{password}" id="password">
     <br><br>
-    <label for="password">Is Active</label>
-    <input type="radio" name="isActive" th:value="*{isActive()}" value="Red"/>
+    <label>Is Active</label>
+    <label>
+        <input type="radio" name="isActive" th:value="*{isActive()}" value="Is Active"/>
+    </label>
 
     <br>
     <p>

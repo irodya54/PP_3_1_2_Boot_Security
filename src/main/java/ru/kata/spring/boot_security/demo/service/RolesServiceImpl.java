@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.RolesDao;
 import ru.kata.spring.boot_security.demo.model.Role;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 @Service
 public class RolesServiceImpl implements RolesService{
@@ -22,6 +20,7 @@ public class RolesServiceImpl implements RolesService{
     }
 
     @Override
+    @Transactional
     public List<String> getRolesNames() {
         return rolesDao.getRolesNames();
     }
