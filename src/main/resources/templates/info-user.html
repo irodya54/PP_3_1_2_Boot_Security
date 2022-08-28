@@ -24,15 +24,11 @@
     <label for="password">Enter Password</label>
     <input id="password" th:field="*{password}" type="password">
     <br><br>
-    <label>Is Active</label>
-    <label>Role: </label>
-    <label>
-        <input name="isActive" th:value="*{isActive()}" type="radio" value="Is Active"/>
-    </label>
+    <label>Is Active:</label>
+    <input th:field="*{active}" type="radio" value="true"/>Yes
+    <input th:field="*{active}" type="radio" value="false"/>No
+    <br><br>
 
-    <input name="Role1" th:value="*{roles}" type="checkbox" value="ROLE_ADMIN">
-    <input name="Role2" th:value="*{roles}" type="checkbox" value="ROLE_USER">
-    <br>
     <input onclick="window.location.href = '/logout';" th:value="Logout" type="button">
 </form>
 </body>
