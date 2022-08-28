@@ -26,15 +26,13 @@
     <br><br>
   <label>Is Active:</label>
   <input type="radio" th:field="*{active}" value="true" />Yes
-  <input type="radio" th:field="*{active}" value="false" />No<br/>
-  <br>
-  <label>Roles:</label>
-        <input type="checkbox" name="roles"
-               th:each="role : ${currentRole}"
-               th:text="${role.role}"
-               th:value="${role.id}"
-               th:field="*{roles}"
-        />
+  <input type="radio" th:field="*{active}" value="false" />No
+
+    <br/>
+    <label>Role: </label>
+    <input type="checkbox" name="Role1" th:value="*{roles}" value="ROLE_ADMIN"> ADMIN
+    <input type="checkbox" name="Role2" th:value="*{roles}" value="ROLE_USER" > USER
+
     <br><br>
     <input type="submit" th:value="Add">
     <input type="button" th:value="Logout" onclick="window.location.href = '/logout';">

@@ -10,7 +10,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RolesService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -36,7 +36,7 @@ public class MyController {
     @GetMapping("/admin/addUser")
     public String addUser(Model model) {
         User user = new User();
-        List<Role> currentRoles = rolesService.getAllRoles();
+        Set<Role> currentRoles = rolesService.getAllRoles();
         model.addAttribute("user", user);
         model.addAttribute("currentRole", currentRoles);
         return "add-user";
@@ -54,10 +54,9 @@ public class MyController {
     @GetMapping("/admin/edit/{id}")
     public String returnUser(@PathVariable("id") int id, Model model) {
         User user = userService.getUserById(id);
-        List<Role> currentRoles = rolesService.getAllRoles();
+        Set<Role> currentRoles = rolesService.getAllRoles();
         model.addAttribute("user", user);
         model.addAttribute("currentRole", currentRoles);
-        System.out.println(user.getId());
         return "add-user";
 
     }
@@ -72,9 +71,9 @@ public class MyController {
 
     }
 
-    @RequestMapping("delete/{id}")
+    @GetMapping("admin/delete/{id}")
     public String deleteUser(@PathVariable("id") int id, Model model) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/admin/";
     }
 }
