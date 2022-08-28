@@ -20,7 +20,8 @@
     <td th:text="${users.name}">Name</td>
     <td th:text="${users.surName}">Surname</td>
     <td th:text="${users.age}">Age</td>
-    <td><a th:href="@{admin/edit/{id}(id=${users.id})}">Edit</a>
+    <td>
+      <a th:href="@{admin/edit/{id}(id=${users.id})}">Edit</a>
       <a th:href="@{admin/delete/{id}(id=${users.id})}">Delete</a></td>
   </tr>
 </table>

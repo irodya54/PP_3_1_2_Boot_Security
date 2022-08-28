@@ -28,13 +28,28 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "authorities",
     joinColumns = @JoinColumn(name = "users_id"),
     inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+    }
+
+    public User(int id, String name, String surName, int age, boolean isActive, String userName, String password, Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.surName = surName;
+        this.age = age;
+        this.isActive = isActive;
+        this.userName = userName;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public void addRoles(Role role) {
+        roles.add(role);
     }
 
     public int getId() {

@@ -1,11 +1,9 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import org.hibernate.annotations.BatchSize;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +16,7 @@ public class Role implements GrantedAuthority {
     @Column(nullable = false, length = 45)
     private String role;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
     private Set<User> users = new HashSet<>();
 
     public Role() {}

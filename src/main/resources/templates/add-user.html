@@ -30,8 +30,8 @@
 
     <br/>
     <label>Role: </label>
-    <input type="checkbox" name="Role1" th:value="*{roles}" value="ROLE_ADMIN"> ADMIN
-    <input type="checkbox" name="Role2" th:value="*{roles}" value="ROLE_USER" > USER
+    <input type="checkbox" name="Role1" th:field="${user.roles}" th:value="ROLE_ADMIN"> ADMIN
+    <input type="checkbox" name="Role2" th:field="${user.roles}" th:value="ROLE_USER" > USER
 
     <br><br>
     <input type="submit" th:value="Add">
