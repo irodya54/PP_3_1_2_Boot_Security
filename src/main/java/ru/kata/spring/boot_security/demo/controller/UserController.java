@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/")
     public String getLogin() {
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/user")
