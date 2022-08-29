@@ -29,40 +29,33 @@ public class AdminController {
 
     @GetMapping()
     public String getAllUsers(Model model) {
-        var users = userService.getAllUsers();
-        model.addAttribute("allUsers", users);
+        model.addAttribute("allUsers", userService.getAllUsers());
         return "/show-users";
     }
 
     @GetMapping("/addUser")
     public String addUser(Model model) {
-        User user = new User();
-        List<Role> roles = new ArrayList<>(rolesService.getAllRoles());
-        model.addAttribute("user", user);
-        model.addAttribute("allRoles", roles);
+        model.addAttribute("user", new User());
+        model.addAttribute("allRoles", rolesService.getAllRoles());
         return "add-user";
     }
 
     @PostMapping("/addUser")
-    public String saveUser(@ModelAttribute("allROles") Set<Role> allRoles, @ModelAttribute("user") User user) {
-        if (user.getId() == 0) {
+    public String saveUser(@ModelAttribute("user") User user) {
             userService.addUser(user);
-        } else {
-            user.setRoles(allRoles);
-            userService.updateUser(user);
-
-        }
-
-        return "redirect:/admin";
+         return "redirect:/admin";
     }
 
     @GetMapping("/edit/{id}")
-    public String returnUser(@ModelAttribute("allROles") Set<Role> allRoles, @PathVariable("id") int id, Model model) {
-        User user = userService.getUserById(id);
-        Set<Role> roles = rolesService.getAllRoles();
-        model.addAttribute("user", user);
-        model.addAttribute("allRoles", roles);
-        return "add-user";
+    public String returnUser(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("allRoles", rolesService.getAllRoles());
+        return "edit-user";
+    }
+    @PatchMapping("{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.updateUser(user);
+        return "redirect:/admin";
     }
 
     @GetMapping("/delete/{id}")

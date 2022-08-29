@@ -13,7 +13,7 @@ import java.util.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "name")
     public String name;
     @Column(name = "surname")
@@ -28,7 +28,7 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "authorities",
     joinColumns = @JoinColumn(name = "users_id"),
     inverseJoinColumns = @JoinColumn(name = "roles_id"))
@@ -58,11 +58,11 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -165,7 +165,7 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + (int) id >>> 16;
+        hash = 31 * hash + (id == null ? 0 : (int) id >>> 16);
         hash = 31 * hash + (userName == null ? 0 : userName.hashCode());
         return hash;
     }

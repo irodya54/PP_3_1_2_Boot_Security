@@ -23,7 +23,8 @@ public class Role implements GrantedAuthority {
             inverseJoinColumns = @JoinColumn(name = "users_id"))
     private Set<User> users;
 
-    public Role() {}
+    public Role() {
+    }
 
     public void addUser(User user) {
         users.add(user);
@@ -65,9 +66,7 @@ public class Role implements GrantedAuthority {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (o == null)
-            return false;
-        if (getClass() != o.getClass())
+        if ((o == null) || (getClass() != o.getClass()))
             return false;
         Role other = (Role) o;
         if (id == null) {
@@ -80,16 +79,13 @@ public class Role implements GrantedAuthority {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode()>>>16);
+        result = prime * result + ((id == null) ? 0 : id.hashCode() >>> 16);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", role='" + role + '\'' +
-                '}';
+        return role;
     }
 
     @Override
