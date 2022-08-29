@@ -167,4 +167,19 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return id == user.id && age == user.age && isActive == user.isActive && name.equals(user.name) && surName.equals(user.surName) && userName.equals(user.userName) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 16));
+        return result;
+    }
 }

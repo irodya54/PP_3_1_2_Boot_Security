@@ -8,7 +8,9 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RolesService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -33,7 +35,7 @@ public class AdminController {
     @GetMapping("/addUser")
     public String addUser(Model model) {
         User user = new User();
-        Set<Role> currentRoles = rolesService.getAllRoles();
+        List<Role> currentRoles = new ArrayList<>(rolesService.getAllRoles());
         model.addAttribute("user", user);
         model.addAttribute("currentRole", currentRoles);
         return "add-user";
@@ -58,7 +60,6 @@ public class AdminController {
         User user = userService.getUserById(id);
         Set<Role> currentRoles = rolesService.getAllRoles();
         model.addAttribute("user", user);
-        model.addAttribute("currentRole", currentRoles);
         return "add-user";
 
     }

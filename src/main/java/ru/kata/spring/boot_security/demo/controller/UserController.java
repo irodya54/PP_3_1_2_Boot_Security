@@ -16,13 +16,11 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
-
     }
-
 
     @GetMapping("/")
     public String getLogin() {
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/user")
@@ -32,6 +30,5 @@ public class UserController {
         user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "info-user";
-
     }
 }

@@ -28,9 +28,8 @@
     <input th:field="*{active}" type="radio" value="true"/>Yes
     <input th:field="*{active}" type="radio" value="false"/>No
     <br><br>
-    <label>Role: </label>
-    <input name="Role1" th:field="${user.roles}" th:value="ROLE_ADMIN" type="checkbox"> ADMIN
-    <input name="Role2" th:field="${user.roles}" th:value="ROLE_USER" type="checkbox"> USER
+    <input type="checkbox" th:field="*{roles}" value="ROLE_ADMIN" th:checked="${user.roles}"> ADMIN
+    <input type="checkbox" th:field="*{roles}" value="ROLE_USER" th:checked="${user.roles}"> USER
     <br><br>
     <input type="submit" th:value="Add">
     <br>  <br>
