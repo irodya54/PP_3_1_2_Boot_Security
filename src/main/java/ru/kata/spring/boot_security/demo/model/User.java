@@ -156,6 +156,21 @@ public class User implements UserDetails {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (int) id >>> 16;
+        hash = 31 * hash + (userName == null ? 0 : userName.hashCode());
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
@@ -168,18 +183,4 @@ public class User implements UserDetails {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return id == user.id && age == user.age && isActive == user.isActive && name.equals(user.name) && surName.equals(user.surName) && userName.equals(user.userName) && password.equals(user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 16));
-        return result;
-    }
 }
